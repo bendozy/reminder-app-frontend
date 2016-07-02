@@ -1,45 +1,53 @@
 import React from 'react';
 import TextInput from '../../common/TextInput';
+import PasswordInput from '../../common/PasswordInput';
 
-const RegisterForm = ({course, onSave, onChange, saving, errors}) => {
+const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) => {
   return (
-    <form>
-      <h1>Manage Course</h1>
-      <TextInput
-      name="title"
-      label="Title"
-      value={course.title}
-      onChange={onChange}
-      error={errors.title} />
+    <form className="login-form">
+      <div className="form-shadow col-md-offset-4 col-md-4">
+        <h2>Create Account</h2>
+        <TextInput
+          name="username"
+          placeholder="Username"
+          value={register.username}
+          required="required"
+          onChange={onChange}
+          onBlur={onBlur}
+          error={errors.username} />
 
-      <TextInput
-      name="category"
-      label="Category"
-      value={course.category}
-      onChange={onChange}
-      error={errors.category} />
+        <PasswordInput
+          name="password"
+          placeholder="Password"
+          required="required"
+          value={register.password}
+          onChange={onChange}
+          error={errors.password} />
 
-      <TextInput
-      name="length"
-      label="Length"
-      value={course.length}
-      onChange={onChange}
-      error={errors.length} />
+        <PasswordInput
+          name="confirmPassword"
+          required="required"
+          placeholder="Confirm Password"
+          value={register.confirmPassword}
+          onChange={onChange}
+          onBlur={onBlur}
+          error={errors.confirmPassword} />
 
-      <input
-      type="submit"
-      disabled={saving}
-      value={saving ? 'Registering...' : 'Register'}
-      className="btn btn-primary"
-      onClick={onSave} />
+        <input
+          type="submit"
+          disabled={saving}
+          value={saving ? 'Registering...' : 'Register'}
+          className="btn btn-primary"
+          onClick={onSave} />
+      </div>
     </form>
   );
 };
 
 RegisterForm.propTypes = {
-  course: React.PropTypes.object.isRequired,
-  allAuthors: React.PropTypes.array,
+  register: React.PropTypes.object.isRequired,
   onSave: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func,
   onChange: React.PropTypes.func.isRequired,
   saving: React.PropTypes.bool,
   errors: React.PropTypes.object

@@ -7,9 +7,10 @@ import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import {checkUserStatus} from './actions/userActions';
-import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
+import './styles/styles.css';
+import './styles/forms.scss';
 
 const store = configureStore();
 store.dispatch(checkUserStatus());

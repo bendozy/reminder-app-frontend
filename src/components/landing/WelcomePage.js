@@ -1,11 +1,11 @@
 import React from 'react';
+import ManageRegisterForm from '../../containers/landing/ManageRegisterForm';
 
 const WelcomePage = () => {
   return (
     <div>
-      Welcome
+      <ManageRegisterForm />
     </div>
-
   );
 };
 
