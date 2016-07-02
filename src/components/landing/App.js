@@ -1,0 +1,21 @@
+import React, { PropTypes } from 'react';
+import { Link, IndexLink } from 'react-router';
+
+const App = (props) => {
+  return (
+    <div>
+      <IndexLink to="/">Home</IndexLink>
+      {' | '}
+      <Link to="/">Demo App</Link>
+      <br/>
+      hello
+      // {props.children}
+    </div>
+  );
+};
+
+App.propTypes = {
+  children: PropTypes.element
+};
+
+export default App;
