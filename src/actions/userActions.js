@@ -8,3 +8,7 @@ export function checkUserStatus() {
   }
   return { type: types.USER_IS_AUTHENTICATED, isAuthenticated};
 }
+
+export function createUser(user) {
+  console.log(user);
+}

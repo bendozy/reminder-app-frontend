@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, error}) => {
+const PasswordInput = ({name, label, onChange, placeholder, value, size, error}) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
@@ -11,13 +11,12 @@ const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, err
       <label htmlFor={name}>{label}</label>
       <div className="field">
         <input
-          type="text"
+          type="password"
           name={name}
           className="form-control"
           placeholder={placeholder}
           value={value}
           size={size}
-          onBlur={onBlur}
           onChange={onChange}/>
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
@@ -25,15 +24,14 @@ const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, err
   );
 };
 
-TextInput.propTypes = {
+PasswordInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
   placeholder: PropTypes.string,
-  size: PropTypes.number,
   value: PropTypes.string,
+  size: PropTypes.number,
   error: PropTypes.string
 };
 
-export default TextInput;
+export default Password;
