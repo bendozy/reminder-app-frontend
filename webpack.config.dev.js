@@ -1,6 +1,5 @@
 import webpack from 'webpack';
 import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('development'),
@@ -18,17 +17,13 @@ export default {
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: 'http://localhost:3600/', // Use absolute paths to avoid the way that URLs are resolved by Chrome when they're parsed from a dynamically loaded CSS blob. Note: Only necessary in Dev.
+    publicPath: 'http://localhost:3000/', // Use absolute paths to avoid the way that URLs are resolved by Chrome when they're parsed from a dynamically loaded CSS blob. Note: Only necessary in Dev.
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.DefinePlugin(GLOBALS), // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
+    new webpack.DefinePlugin(GLOBALS), // Tells React to build in prod mode. https://facebook.github.io/react/downloads.htmlnew webpack.HotModuleReplacementPlugin());
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
-      template: 'src/index.ejs',
-      inject: true
-    })
+    new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
