@@ -93,7 +93,7 @@ class ManageRegisterForm extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('User Created');
-    this.context.router.push('/dashboard');
+    // this.context.router.push('/dashboard');
   }
 
   render() {
@@ -109,9 +109,9 @@ class ManageRegisterForm extends React.Component {
   }
 }
 
-ManageRegisterForm.propTypes = {
-  actions: PropTypes.object.isRequired
-};
+// ManageRegisterForm.propTypes = {
+//   actions: PropTypes.object.isRequired
+// };
 
 //Pull in the React Router context so router is available on this.context.router.
 ManageRegisterForm.contextTypes = {

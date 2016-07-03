@@ -2,34 +2,37 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
-import RegisterForm from '../../components/landing/RegisterForm';
+import LoginForm from '../../components/landing/LoginForm';
 import toastr from 'toastr';
 
-class ManageRegisterForm extends React.Component {
+class ManageLoginForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      register: {
+      login: {
         'username': '',
-        'password': '',
-        'confirmPassword': ''
+        'password': ''
       },
       errors: {},
       saving: false
     };
 
-    this.registerUser = this.registerUser.bind(this);
-    this.updateRegisterState = this.updateRegisterState.bind(this);
-    this.validateElementsOnBlur = this.validateElementsOnBlur.bind(this);
+    this.loginUser = this.loginUser.bind(this);
+    this.updateLoginState = this.updateLoginState.bind(this);
   }
 
-  registerFormIsValid() {
+  loginFormIsValid() {
     let formIsValid = true;
     let errors = {};
 
-    if (this.state.register.username.length < 5) {
-      errors.username = 'Username must be at least 5 characters.';
+    if (this.state.login.username.length === 0) {
+      errors.username = 'Username cannot be null.';
+      formIsValid = false;
+    }
+
+    if (this.state.login.password.length === 0) {
+      errors.username = 'Password cannot be null.';
       formIsValid = false;
     }
 
@@ -37,52 +40,24 @@ class ManageRegisterForm extends React.Component {
     return formIsValid;
   }
 
-  validateElementsOnBlur(event) {
-    let errors = {};
-    if (event.target.name === 'username'
-        && this.state.register.username.length < 5) {
-      errors.username = 'Username must be at least 5 characters.';
-    }
-
-    if (event.target.name === 'password'
-        && this.state.register.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters.';
-    }
-
-    if (event.target.name === 'confirmPassword'
-      && this.state.register.password
-      !== this.state.register.confirmPassword) {
-      errors.confirmPassword = 'Password do not match.';
-    }
-    this.setState({errors: errors});
-  }
-
-  updateRegisterState(event) {
+  updateLoginState(event) {
     const field = event.target.name;
-    let errors = {};
-    let register = this.state.register;
+    let login = this.state.login;
 
-    if (event.target.name === 'password'
-        && this.state.register.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters.';
-      this.setState({errors: errors});
-    } else {
-      this.setState({errors: {}});
-    }
-    register[field] = event.target.value;
-    return this.setState({register});
+    login[field] = event.target.value;
+    return this.setState({login});
   }
 
-  registerUser(event) {
+  loginUser(event) {
     event.preventDefault();
 
-    if (!this.registerFormIsValid()) {
+    if (!this.loginFormIsValid()) {
       return;
     }
 
     this.setState({saving: true});
 
-    this.props.actions.registerUser(this.state.register)
+    this.props.actions.loginUser(this.state.login)
       .then(() => this.redirect())
       .catch(error => {
         toastr.error(error);
@@ -92,29 +67,28 @@ class ManageRegisterForm extends React.Component {
 
   redirect() {
     this.setState({saving: false});
-    toastr.success('User Created');
+    toastr.success('Login Sucessful');
     this.context.router.push('/dashboard');
   }
 
   render() {
     return (
-      <RegisterForm
-        onChange={this.updateRegisterState}
-        onBlur={this.validateElementsOnBlur}
-        onSave={this.registerUser}
-        register={this.state.register}
+      <LoginForm
+        onChange={this.updateLoginState}
+        onSave={this.loginUser}
+        login={this.state.login}
         errors={this.state.errors}
         saving={this.state.saving} />
   );
   }
 }
 
-ManageRegisterForm.propTypes = {
+ManageLoginForm.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router.
-ManageRegisterForm.contextTypes = {
+ManageLoginForm.contextTypes = {
   router: PropTypes.object
 };
 
@@ -125,4 +99,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ManageRegisterForm);
+export default connect(null, mapDispatchToProps)(ManageLoginForm);

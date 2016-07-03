@@ -2,41 +2,31 @@ import React from 'react';
 import TextInput from '../../common/TextInput';
 import PasswordInput from '../../common/PasswordInput';
 
-const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) => {
+const LoginForm = ({ login, onSave, onChange, saving, errors }) => {
   return (
-    <form className="register-form">
+    <form className="login-form">
       <div className="form-shadow col-md-offset-4 col-md-4">
-        <h2>Create Account</h2>
+        <h2>Sign In</h2>
         <TextInput
           name="username"
           placeholder="Username"
-          value={register.username}
+          value={login.username}
           required="required"
           onChange={onChange}
-          onBlur={onBlur}
           error={errors.username} />
 
         <PasswordInput
           name="password"
           placeholder="Password"
           required="required"
-          value={register.password}
+          value={login.password}
           onChange={onChange}
           error={errors.password} />
-
-        <PasswordInput
-          name="confirmPassword"
-          required="required"
-          placeholder="Confirm Password"
-          value={register.confirmPassword}
-          onChange={onChange}
-          onBlur={onBlur}
-          error={errors.confirmPassword} />
 
         <input
           type="submit"
           disabled={saving}
-          value={saving ? 'Registering...' : 'Register'}
+          value={saving ? 'Signing In...' : 'Login'}
           className="btn btn-primary"
           onClick={onSave} />
       </div>
@@ -44,13 +34,12 @@ const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) =>
   );
 };
 
-RegisterForm.propTypes = {
-  register: React.PropTypes.object.isRequired,
+LoginForm.propTypes = {
+  login: React.PropTypes.object.isRequired,
   onSave: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func,
   onChange: React.PropTypes.func.isRequired,
   saving: React.PropTypes.bool,
   errors: React.PropTypes.object
 };
 
-export default RegisterForm;
+export default LoginForm;
