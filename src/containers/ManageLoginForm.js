@@ -68,7 +68,7 @@ class ManageLoginForm extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('Login Sucessful');
-    this.context.router.push('/home');
+    this.context.router.refresh();
   }
 
   render() {

@@ -13,19 +13,73 @@ class ManageContactForm extends React.Component {
 
     this.state = {
       contact: {
+        'id': '',
         'fullname': '',
         'telephone': '',
         'email': '',
-        'birthday': ''
+        'birthday': '',
       },
       errors: {},
       saving: false,
-      isNew: true
+      isNew: true,
     };
-
-    this.contactUser = this.contactUser.bind(this);
+    this.saveUser = this.saveUser.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.updateContactState = this.updateContactState.bind(this);
+  }
+
+  componentWillMount() {
+    if(this.props.params.id) {
+      this.props.actions.getContactById(this.props.params.id);
+      this.setState({
+        contact: Object.assign({}, this.props.contact),
+        isNew: false,
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      contact: Object.assign({}, nextProps.contact),
+      isNew: false,
+    });
+  }
+
+
+  onBlur(event) {
+    let errors = {};
+    switch (event.target.name) {
+      case 'fullname':
+      if (this.state.contact.fullname.length === 0) {
+        errors.fullname = 'Full Name cannot be null.';
+      }
+        break;
+      case 'email':
+      if (this.state.contact.email.length === 0) {
+        errors.email = 'Email cannot be null.';
+      } else if (!validator.isEmail(this.state.contact.email)) {
+        errors.email = 'Email is not valid.';
+      }
+        break;
+      case 'birthday':
+      if (this.state.contact.birthday.length === 0) {
+        errors.birthday = 'Birthday cannot be null.';
+      } else if (!moment(this.state.contact.birthday,'YYYY-MM-DD').isValid()) {
+        errors.birthday = 'Birthday is not a valid date.';
+      }
+        break;
+      case 'telephone':
+      if (this.state.contact.telephone.length === 0) {
+        errors.telephone = 'Telephone cannot be null.';
+      } else if (!(/^(\+?234)?[7-8]?[0-1]?\d{8}[0-9]$/.test(this.state.contact.telephone))) {
+        errors.telephone = 'Telephone is not valid.';
+      }
+        break;
+      default:
+        break;
+
+    }
+    this.setState({errors});
   }
 
   contactFormIsValid() {
@@ -70,42 +124,6 @@ class ManageContactForm extends React.Component {
     return formIsValid;
   }
 
-  onBlur(event) {
-    let errors = {};
-    switch (event.target.name) {
-      case 'fullname':
-      if (this.state.contact.fullname.length === 0) {
-        errors.fullname = 'Full Name cannot be null.';
-      }
-        break;
-      case 'email':
-      if (this.state.contact.email.length === 0) {
-        errors.email = 'Email cannot be null.';
-      } else if (!validator.isEmail(this.state.contact.email)) {
-        errors.email = 'Email is not valid.';
-      }
-        break;
-      case 'birthday':
-      if (this.state.contact.birthday.length === 0) {
-        errors.birthday = 'Birthday cannot be null.';
-      } else if (!moment(this.state.contact.birthday,'YYYY-MM-DD').isValid()) {
-        errors.birthday = 'Birthday is not a valid date.';
-      }
-        break;
-      case 'telephone':
-      if (this.state.contact.telephone.length === 0) {
-        errors.telephone = 'Telephone cannot be null.';
-      } else if (!(/^(\+?234)?[7-8]?[0-1]?\d{8}[0-9]$/.test(this.state.contact.telephone))) {
-        errors.telephone = 'Telephone is not valid.';
-      }
-        break;
-      default:
-        break;
-
-    }
-    this.setState({errors});
-  }
-
   updateContactState(event) {
     const field = event.target.name;
     let contact = this.state.contact;
@@ -114,7 +132,7 @@ class ManageContactForm extends React.Component {
     return this.setState({contact});
   }
 
-  contactUser(event) {
+  saveUser(event) {
     event.preventDefault();
 
     if (!this.contactFormIsValid()) {
@@ -133,9 +151,8 @@ class ManageContactForm extends React.Component {
   createContact() {
     this.props.actions.createContact(this.state.contact)
       .then(() => this.redirect())
-      .catch(error => {
-        console.log(error);
-        toastr.error(error);
+      .catch(() => {
+        toastr.error('Error creating contact');
         this.setState({saving: false});
      });
   }
@@ -144,7 +161,6 @@ class ManageContactForm extends React.Component {
     this.props.actions.updateContact(this.state.contact)
       .then(() => this.redirect())
       .catch(error => {
-        console.log(error);
         toastr.error(error);
         this.setState({saving: false});
      });
@@ -161,7 +177,7 @@ class ManageContactForm extends React.Component {
       <ContactForm
         onChange={this.updateContactState}
         onBlur={this.onBlur}
-        onSave={this.contactUser}
+        onSave={this.saveUser}
         contact={this.state.contact}
         errors={this.state.errors}
         saving={this.state.saving}
@@ -171,19 +187,40 @@ class ManageContactForm extends React.Component {
 }
 
 ManageContactForm.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  contact: PropTypes.object,
+  params: PropTypes.object,
 };
 
 //Pull in the React Router context so router is available on this.context.router.
 ManageContactForm.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
 };
 
+function getContactById(contacts, id) {
+  const contact = contacts.filter(contact => contact.id == id);
+  if (contact) return contact[0]; //since filter returns an array, have to grab the first.
+  return null;
+}
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state, ownProps) {
+  const contactId = ownProps.params.id;
+
+  let contact =  {};
+  if (contactId && state.contacts.length > 0) {
+    contact = getContactById(state.contacts, contactId);
+  } else if(contactId) {
+    contact = state.contact;
+  }
   return {
-    actions: bindActionCreators(contactActions, dispatch)
+    contact: contact,
   };
 }
 
-export default connect(null, mapDispatchToProps)(ManageContactForm);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(contactActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageContactForm);

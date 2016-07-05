@@ -3,21 +3,22 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import HomePage from '../components/HomePage';
 import ContacList from './ContactList';
-import * as contactActions from '../actions/contactActions';
+import * as userActions from '../actions/userActions';
+import toastr from 'toastr';
 
 class ManageHomePage extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.logoutUser = this.logoutUser.bind(this);
   }
 
-  conponentWillMount() {
-    this.props.actions.loadContacts();
-  }
-
   logoutUser() {
-    alert('logout');
+    this.props.actions.logoutUser()
+      .then(function () {
+        toastr.success('Logout Successful');
+        this.context.router.refresh();
+      });
   }
 
   render() {
@@ -31,16 +32,18 @@ class ManageHomePage extends React.Component {
 }
 
 ManageHomePage.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 ManageHomePage.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(contactActions, dispatch)
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+    },
   };
 };
 

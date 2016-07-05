@@ -1,22 +1,13 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 
-export default function contactReducer(state = initialState.contacts, action) {
+export default function contactReducer(state = initialState.contact, action) {
   switch (action.type) {
-    case types.CREATE_CONTACT_SUCCESS: {
-      return [
-        ...state,
-        Object.assign({}, action.contact)
-      ];
+    case types.LOAD_CONTACT_BY_ID: {
+      return action.contact;
     }
     case types.UPDATE_CONTACT_SUCCESS: {
-      return [
-        ...state.filter(contact => contact.id !== action.contact.id),
-        Object.assign({}, action.course)
-      ];
-    }
-    case types.LOAD_CONTACTS: {
-      return action.contacts;
+      return null;
     }
     default:
       return state;

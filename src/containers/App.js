@@ -1,29 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as userActions from '../actions/userActions';
-import * as contactActions from '../actions/contactActions';
 import ManageHomePage from '../containers/ManageHomePage';
-import WelcomePage from '../components/WelcomePage';
-import toastr from 'toastr';
+import WelcomePage from './WelcomePage';
 
 class App extends Component {
   constructor (props) {
     super(props);
-    
-    this.logoutUser = this.logoutUser.bind(this);
-  }
-
-
-  logoutUser() {
-    this.props.actions.logoutUser()
-      .then(function () {
-        this.context.router.push('/');
-        toastr.success('Logout Successful');
-      })
-      .catch(function () {
-        toastr.error('Logout Error');
-      });
   }
 
   renderWelcomePage() {
@@ -47,11 +29,10 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  actions: PropTypes.object
 };
 
 App.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -59,13 +40,4 @@ const mapStateToProps = (state) => {
   return { isAuthenticated };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: {
-      userActions: bindActionCreators(userActions, dispatch),
-      contactActions: bindActionCreators(contactActions, dispatch)
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps,null)(App);

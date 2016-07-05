@@ -6,7 +6,6 @@ const API_PREFIX = process.env.API_URL;
 
 
 export function checkUserStatus() {
-  console.log(API_PREFIX);
   const userData = JSON.parse(localStorage.getItem('app-user'));
   let isAuthenticated = false;
   if (userData && userData.id) {
@@ -32,6 +31,7 @@ export function loginUserSuccess(data) {
 }
 
 export function loginUser(data) {
+  console.log(data)
   return function(dispatch) {
     return axios.post(API_PREFIX + 'users/login', data)
       .then(response => {
@@ -50,8 +50,8 @@ export function logoutUser() {
       method: 'post',
       url: API_PREFIX + '/users/logout',
       params: {
-        access_token: userData.id
-      }
+        access_token: userData.id,
+      },
     }).then(() => {
       dispatch(logoutUserSuccess());
     }).catch(error => {

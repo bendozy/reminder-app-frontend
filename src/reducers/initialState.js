@@ -1,6 +1,7 @@
 export default {
   user: {
-    isAuthenticated : false
+    isAuthenticated : false,
   },
-  contacts: []
+  contacts: [],
+  contact: {},
 };
