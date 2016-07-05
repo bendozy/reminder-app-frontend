@@ -31,7 +31,6 @@ export function loginUserSuccess(data) {
 }
 
 export function loginUser(data) {
-  console.log(data)
   return function(dispatch) {
     return axios.post(API_PREFIX + 'users/login', data)
       .then(response => {

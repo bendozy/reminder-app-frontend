@@ -19,6 +19,7 @@ body {
 
 .main-content {
     background-color: #FFFFFF;
+    min-height: 100%;
 }
 
 .item-fullname {

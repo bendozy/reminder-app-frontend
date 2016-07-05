@@ -43,7 +43,7 @@ export function updateContact(data) {
   return function(dispatch) {
     return axios({
       method: 'put',
-      url: API_PREFIX + '/Contacts/' + userData.userId,
+      url: API_PREFIX + 'Contacts/' + userData.userId,
       data: data,
       params: {
         access_token: userData.id,

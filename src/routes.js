@@ -14,7 +14,7 @@ export default (
       <IndexRoute component={ContactList} />
       <Route path="/contacts/add" component={ManageContactForm} />
       <Route path="/contacts/:id/edit" component={ManageContactForm} />
-      <Route path="*" component={NotFoundPage} />
     </Route>
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );
