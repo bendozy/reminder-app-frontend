@@ -1,6 +1,6 @@
 import React from 'react';
-import TextInput from '../../common/TextInput';
-import PasswordInput from '../../common/PasswordInput';
+import TextInput from '../common/TextInput';
+import PasswordInput from '../common/PasswordInput';
 
 const LoginForm = ({ login, onSave, onChange, saving, errors }) => {
   return (
@@ -13,12 +13,14 @@ const LoginForm = ({ login, onSave, onChange, saving, errors }) => {
           value={login.username}
           required="required"
           onChange={onChange}
+          size={60}
           error={errors.username} />
 
         <PasswordInput
           name="password"
           placeholder="Password"
           required="required"
+          size={60}
           value={login.password}
           onChange={onChange}
           error={errors.password} />

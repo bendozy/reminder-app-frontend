@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as userActions from '../../actions/userActions';
-import LoginForm from '../../components/landing/LoginForm';
+import * as userActions from '../actions/userActions';
+import LoginForm from '../components/LoginForm';
 import toastr from 'toastr';
 
 class ManageLoginForm extends React.Component {
@@ -32,7 +32,7 @@ class ManageLoginForm extends React.Component {
     }
 
     if (this.state.login.password.length === 0) {
-      errors.username = 'Password cannot be null.';
+      errors.password = 'Password cannot be null.';
       formIsValid = false;
     }
 
@@ -60,7 +60,7 @@ class ManageLoginForm extends React.Component {
     this.props.actions.loginUser(this.state.login)
       .then(() => this.redirect())
       .catch(error => {
-        toastr.error(error);
+        toastr.error('Login Failed');
         this.setState({saving: false});
       });
   }
@@ -68,7 +68,7 @@ class ManageLoginForm extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('Login Sucessful');
-    this.context.router.push('/dashboard');
+    this.context.router.push('/home');
   }
 
   render() {
@@ -93,7 +93,7 @@ ManageLoginForm.contextTypes = {
 };
 
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(userActions, dispatch)
   };

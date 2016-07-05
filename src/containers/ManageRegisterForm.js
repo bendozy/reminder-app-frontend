@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as userActions from '../../actions/userActions';
-import RegisterForm from '../../components/landing/RegisterForm';
+import * as userActions from '../actions/userActions';
+import RegisterForm from '../components/RegisterForm';
 import toastr from 'toastr';
 
 class ManageRegisterForm extends React.Component {
@@ -85,7 +85,8 @@ class ManageRegisterForm extends React.Component {
     this.props.actions.registerUser(this.state.register)
       .then(() => this.redirect())
       .catch(error => {
-        toastr.error(error);
+        console.log('error', error);
+        toastr.error('Username already exists');
         this.setState({saving: false});
       });
   }
@@ -93,7 +94,7 @@ class ManageRegisterForm extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('User Created');
-    // this.context.router.push('/dashboard');
+    this.context.router.push('/home');
   }
 
   render() {
@@ -109,9 +110,9 @@ class ManageRegisterForm extends React.Component {
   }
 }
 
-// ManageRegisterForm.propTypes = {
-//   actions: PropTypes.object.isRequired
-// };
+ManageRegisterForm.propTypes = {
+  actions: PropTypes.object.isRequired
+};
 
 //Pull in the React Router context so router is available on this.context.router.
 ManageRegisterForm.contextTypes = {

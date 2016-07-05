@@ -11,7 +11,7 @@ export default function userReducer(state = initialState.user, action) {
       const isAuthenticated = true;
       return Object.assign({}, state, { isAuthenticated });
     }
-    case types.REGISTER_FAILURE: {
+    case types.LOGOUT_SUCCESS: {
       const isAuthenticated = false;
       return Object.assign({}, state, { isAuthenticated });
     }

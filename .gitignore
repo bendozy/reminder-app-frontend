@@ -29,6 +29,10 @@ node_modules
 #dist folder
 dist
 
+#dev environment
+.env
+webpack.config.dev.js
+
 #Webstorm metadata
 .idea
 

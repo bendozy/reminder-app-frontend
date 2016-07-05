@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, error}) => {
-  let wrapperClass = ' form-group  form-inline';
+const EmailInput = ({name, label, onChange, onBlur, placeholder, value, size, error}) => {
+  let wrapperClass = 'form-group form-inline';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
   }
@@ -10,7 +10,7 @@ const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, err
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
         <input
-          type="text"
+          type="email"
           name={name}
           className="form-control"
           placeholder={placeholder}
@@ -23,7 +23,7 @@ const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, err
   );
 };
 
-TextInput.propTypes = {
+EmailInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
@@ -34,4 +34,4 @@ TextInput.propTypes = {
   error: PropTypes.string
 };
 
-export default TextInput;
+export default EmailInput;

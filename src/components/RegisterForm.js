@@ -1,6 +1,6 @@
 import React from 'react';
-import TextInput from '../../common/TextInput';
-import PasswordInput from '../../common/PasswordInput';
+import TextInput from '../common/TextInput';
+import PasswordInput from '../common/PasswordInput';
 
 const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) => {
   return (
@@ -12,12 +12,14 @@ const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) =>
           placeholder="Username"
           value={register.username}
           required="required"
+          size={60}
           onChange={onChange}
           onBlur={onBlur}
           error={errors.username} />
 
         <PasswordInput
           name="password"
+          size={60}
           placeholder="Password"
           required="required"
           value={register.password}
@@ -27,6 +29,7 @@ const RegisterForm = ({ register, onSave, onChange, onBlur, saving, errors }) =>
         <PasswordInput
           name="confirmPassword"
           required="required"
+          size={60}
           placeholder="Confirm Password"
           value={register.confirmPassword}
           onChange={onChange}

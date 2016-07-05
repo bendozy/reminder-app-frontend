@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 const PasswordInput = ({name, label, onChange, onBlur, placeholder, value, size, error}) => {
-  let wrapperClass = 'form-group';
+  let wrapperClass = 'form-group form-inline';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
   }
@@ -9,7 +9,6 @@ const PasswordInput = ({name, label, onChange, onBlur, placeholder, value, size,
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-      <div className="field">
         <input
           type="password"
           name={name}
@@ -20,7 +19,6 @@ const PasswordInput = ({name, label, onChange, onBlur, placeholder, value, size,
           onBlur={onBlur}
           onChange={onChange}/>
         {error && <div className="alert alert-danger">{error}</div>}
-      </div>
     </div>
   );
 };

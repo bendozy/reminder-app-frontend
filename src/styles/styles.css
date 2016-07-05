@@ -1,0 +1,26 @@
+body {
+    padding-top: 70px;
+    background-color: #E5E5E5;
+}
+
+.home {
+    background-color: #E5E5E5;
+}
+
+.navbar-default {
+    background-color: #0288D1;
+    border-color: #0288D1;
+    width: 100%;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.main-content {
+    background-color: #FFFFFF;
+}
+
+.item-fullname {
+    width: 30%;
+}
