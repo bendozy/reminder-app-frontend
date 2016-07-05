@@ -27,7 +27,7 @@ class ContactList extends React.Component {
         </thead>
         <tbody>
           {this.props.contacts.map(contact =>
-            <ContactListItem key={contact.id} contact={contact}/>
+            <ContactListItem key={contact.id} contact={contact} />
           )}
         </tbody>
       </table>
@@ -38,11 +38,11 @@ class ContactList extends React.Component {
 
 ContactList.propTypes = {
   actions: PropTypes.object.isRequired,
-  contacts: PropTypes.array
+  contacts: PropTypes.array,
 };
 
 ContactList.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(contactActions, dispatch)
+    actions: bindActionCreators(contactActions, dispatch),
   };
 };
 

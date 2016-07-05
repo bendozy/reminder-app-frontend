@@ -9,15 +9,15 @@ const TextInput = ({name, label, onChange, onBlur, placeholder, value, size, err
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-        <input
-          type="text"
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          size={size}
-          onBlur={onBlur}
-          onChange={onChange}/>
+      <input
+        type="text"
+        name={name}
+        className="form-control"
+        placeholder={placeholder}
+        value={value}
+        size={size}
+        onBlur={onBlur}
+        onChange={onChange} />
         {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
@@ -31,7 +31,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   size: PropTypes.number,
   value: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default TextInput;

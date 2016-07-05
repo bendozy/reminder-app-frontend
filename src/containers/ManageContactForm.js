@@ -13,7 +13,6 @@ class ManageContactForm extends React.Component {
 
     this.state = {
       contact: {
-        'id': '',
         'fullname': '',
         'telephone': '',
         'email': '',

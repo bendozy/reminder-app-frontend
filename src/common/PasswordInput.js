@@ -9,16 +9,16 @@ const PasswordInput = ({name, label, onChange, onBlur, placeholder, value, size,
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-        <input
-          type="password"
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          size={size}
-          onBlur={onBlur}
-          onChange={onChange}/>
-        {error && <div className="alert alert-danger">{error}</div>}
+      <input
+        type="password"
+        name={name}
+        className="form-control"
+        placeholder={placeholder}
+        value={value}
+        size={size}
+        onBlur={onBlur}
+        onChange={onChange} />
+      {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
 };
@@ -31,7 +31,7 @@ PasswordInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   size: PropTypes.number,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default PasswordInput;

@@ -9,16 +9,16 @@ const EmailInput = ({name, label, onChange, onBlur, placeholder, value, size, er
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
-        <input
-          type="email"
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          size={size}
-          onBlur={onBlur}
-          onChange={onChange}/>
-        {error && <div className="alert alert-danger">{error}</div>}
+      <input
+        type="email"
+        name={name}
+        className="form-control"
+        placeholder={placeholder}
+        value={value}
+        size={size}
+        onBlur={onBlur}
+        onChange={onChange} />
+      {error && <div className="alert alert-danger">{error}</div>}
     </div>
   );
 };
@@ -31,7 +31,7 @@ EmailInput.propTypes = {
   placeholder: PropTypes.string,
   size: PropTypes.number,
   value: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default EmailInput;

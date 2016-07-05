@@ -108,7 +108,7 @@ class WelcomePage extends Component {
   redirectRegisterSuccess() {
     this.setState({registerSaving: false});
     toastr.success('User Created');
-    this.context.router.refresh();
+    location.reload(false);
   }
 
   // LoginForm functions
@@ -156,9 +156,9 @@ class WelcomePage extends Component {
   }
 
   redirectLoginSucess() {
-    this.setState({loginSsaving: false});
+    this.setState({loginSaving: false});
     toastr.success('Login Sucessful');
-    this.context.router.refresh();
+    location.reload(false);
   }
 
   render(){
@@ -191,10 +191,6 @@ WelcomePage.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-//Pull in the React Router context so router is available on this.context.router.
-WelcomePage.contextTypes = {
-  router: PropTypes.object,
-};
 
 
 function mapDispatchToProps(dispatch) {

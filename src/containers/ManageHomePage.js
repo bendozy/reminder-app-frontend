@@ -17,7 +17,7 @@ class ManageHomePage extends React.Component {
     this.props.actions.logoutUser()
       .then(function () {
         toastr.success('Logout Successful');
-        this.context.router.refresh();
+        location.reload(false);
       });
   }
 

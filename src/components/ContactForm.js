@@ -66,7 +66,7 @@ ContactForm.propTypes = {
   onBlur:React.PropTypes.func,
   isNew: React.PropTypes.bool.isRequired,
   saving: React.PropTypes.bool,
-  errors: React.PropTypes.object
+  errors: React.PropTypes.object,
 };
 
 export default ContactForm;

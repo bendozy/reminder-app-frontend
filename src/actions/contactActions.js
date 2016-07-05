@@ -25,7 +25,7 @@ export function createContact(data) {
   return function(dispatch) {
     return axios({
       method: 'post',
-      url: API_PREFIX + '/Contacts',
+      url: API_PREFIX + 'Contacts',
       data: data,
       params: {
         access_token: userData.id,

@@ -21,7 +21,7 @@ const ContactListItem = ({contact}) => {
 };
 
 ContactListItem.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
 };
 
 export default ContactListItem;
