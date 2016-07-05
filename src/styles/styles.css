@@ -19,7 +19,9 @@ body {
 
 .main-content {
     background-color: #FFFFFF;
-    min-height: 100%;
+    min-height: 750px;
+    margin-bottom: 5%;
+    margin-top: 2%;
 }
 
 .item-fullname {
