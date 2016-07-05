@@ -108,7 +108,7 @@ export function deleteContact(id) {
       params: {
         "access_token": userData.id,
       },
-    }).then(response => {
+    }).then(() => {
       dispatch(deleteContactSuccess(id));
     }).catch(error => {
       throw error;

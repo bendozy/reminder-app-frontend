@@ -13,7 +13,7 @@
     "lint": "esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
-    "remove-dist": "rimraf ./dist",
+    "remove-dist": "rm -rf ./dist",
     "prebuild": "npm run clean-dist && npm run lint && npm run test",
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "mocha tools/testSetup.js \"src/**/*.spec.js\" --reporter progress",
