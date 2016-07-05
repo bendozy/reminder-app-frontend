@@ -11,6 +11,10 @@ export function updateContactSuccess(contact) {
   return { type: types.UPDATE_CONTACT_SUCCESS, contact };
 }
 
+export function deleteContactSuccess(id) {
+  return { type: types.DELETE_CONTACT_SUCCESS, id };
+}
+
 export function loadContactSuccess(contacts) {
   return { type: types.LOAD_CONTACTS, contacts };
 }
@@ -43,7 +47,7 @@ export function updateContact(data) {
   return function(dispatch) {
     return axios({
       method: 'put',
-      url: API_PREFIX + 'Contacts/' + userData.userId,
+      url: API_PREFIX + 'Contacts/' + data.id,
       data: data,
       params: {
         access_token: userData.id,
@@ -88,6 +92,24 @@ export function getContactById(id) {
       },
     }).then(response => {
       dispatch(getContactBySuccess(response.data));
+    }).catch(error => {
+      throw error;
+    });
+  };
+}
+
+export function deleteContact(id) {
+  const userData = JSON.parse(localStorage.getItem('app-user'));
+
+  return function(dispatch) {
+    return axios({
+      method: 'DELETE',
+      url: API_PREFIX + '/Contacts/' + id,
+      params: {
+        "access_token": userData.id,
+      },
+    }).then(response => {
+      dispatch(deleteContactSuccess(id));
     }).catch(error => {
       throw error;
     });

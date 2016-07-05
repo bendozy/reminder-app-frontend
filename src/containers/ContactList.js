@@ -7,10 +7,16 @@ import * as contactActions from '../actions/contactActions';
 class ContactList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.deleteContact = this.deleteContact.bind(this);
   }
 
   componentWillMount() {
     this.props.actions.loadContacts();
+  }
+
+  deleteContact(id) {
+    this.props.actions.deleteContact(id);
   }
 
   render () {
@@ -27,7 +33,10 @@ class ContactList extends React.Component {
         </thead>
         <tbody>
           {this.props.contacts.map(contact =>
-            <ContactListItem key={contact.id} contact={contact} />
+            <ContactListItem 
+              key={contact.id}
+              contact={contact}
+              onDelete={this.deleteContact} />
           )}
         </tbody>
       </table>
