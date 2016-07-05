@@ -41,9 +41,7 @@ ManageHomePage.contextTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: {
-      userActions: bindActionCreators(userActions, dispatch),
-    },
+    actions: bindActionCreators(userActions, dispatch),
   };
 };
 

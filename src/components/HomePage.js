@@ -15,7 +15,7 @@ const HomePage = ({children, onLogout}) => {
             <Link to="/contacts/add" className="list-group-item">
               Add Contact
             </Link>
-            <Link to="/" onClick={onLogout} className="list-group-item">
+            <Link to="#" onClick={onLogout} className="list-group-item">
               Logout
             </Link>
           </div>
