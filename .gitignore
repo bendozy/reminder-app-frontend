@@ -27,7 +27,9 @@ build/Release
 node_modules
 
 #dist folder
-dist
+#dist
+webpack.config.dev.js
+webpack.config.prod.js
 
 #dev environment
 .env

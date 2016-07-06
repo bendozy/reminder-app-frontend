@@ -66,7 +66,7 @@ export function loadContacts() {
   return function(dispatch) {
     return axios({
       method: 'GET',
-      url: API_PREFIX + '/Contacts',
+      url: API_PREFIX + 'Contacts',
       params: {
         "access_token": userData.id,
         "filter[where][userId]": userData.userId,
@@ -86,7 +86,7 @@ export function getContactById(id) {
   return function(dispatch) {
     return axios({
       method: 'GET',
-      url: API_PREFIX + '/Contacts/' + id,
+      url: API_PREFIX + 'Contacts/' + id,
       params: {
         "access_token": userData.id,
       },

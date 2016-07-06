@@ -9,8 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
   'process.env.API_URL': JSON.stringify(
-    process.env.API_URL || 'https://reminder-app-api.herokuapp.com/api/'
-  ),
+    process.env.API_URL || 'https://reminder-app-api.herokuapp.com/api/'),
   __DEV__: false,
 };
 
