@@ -6,7 +6,7 @@ const historyApiFallback = require('connect-history-api-fallback');
 
 // Run Browsersync
 browserSync({
-  port: 3987,
+  port: (process.env.PORT || 8080),
   ui: {
     port: 3978,
   },

@@ -18,7 +18,7 @@ class ManageHomePage extends React.Component {
     this.props.actions.logoutUser()
       .then(function () {
         toastr.success('Logout Successful');
-        browserHistory.push('/course');
+        browserHistory.push('/');
       });
   }
 
