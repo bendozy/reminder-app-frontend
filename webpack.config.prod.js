@@ -1,17 +1,20 @@
 // For info about this file refer to webpack and webpack-hot-middleware documentation
 // For info on how we're generating bundles with hashed filenames for cache busting: https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.w99i89nsz
-import webpack from 'webpack';
-import path from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
+  'process.env.API_URL': JSON.stringify(
+    process.env.API_URL || 'https://reminder-app-api.herokuapp.com/api/'
+  ),
   __DEV__: false,
 };
 
-export default {
+module.exports = {
   debug: true,
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   noInfo: true, // set to false to see a list of every file being bundled.
