@@ -5,6 +5,7 @@ import HomePage from '../components/HomePage';
 import ContacList from './ContactList';
 import * as userActions from '../actions/userActions';
 import toastr from 'toastr';
+import {browserHistory} from 'react-router';
 
 class ManageHomePage extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class ManageHomePage extends React.Component {
     this.props.actions.logoutUser()
       .then(function () {
         toastr.success('Logout Successful');
-        location.reload(false);
+        browserHistory.push('/course');
       });
   }
 

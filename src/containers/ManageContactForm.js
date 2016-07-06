@@ -6,10 +6,15 @@ import ContactForm from '../components/ContactForm';
 import toastr from 'toastr';
 import validator from 'validator';
 import moment from 'moment';
+import {browserHistory} from 'react-router';
 
 class ManageContactForm extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    if(!this.props.isAuthenticated) {
+      browserHistory.push('/');
+    }
 
     this.state = {
       contact: {
@@ -189,6 +194,7 @@ ManageContactForm.propTypes = {
   actions: PropTypes.object.isRequired,
   contact: PropTypes.object,
   params: PropTypes.object,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 //Pull in the React Router context so router is available on this.context.router.
@@ -204,16 +210,14 @@ function getContactById(contacts, id) {
 
 function mapStateToProps(state, ownProps) {
   const contactId = ownProps.params.id;
-
+  const { isAuthenticated } = state.user;
   let contact =  {};
   if (contactId && state.contacts.length > 0) {
     contact = getContactById(state.contacts, contactId);
   } else if(contactId) {
     contact = state.contact;
   }
-  return {
-    contact: contact,
-  };
+  return { contact, isAuthenticated };
 }
 
 function mapDispatchToProps(dispatch) {
