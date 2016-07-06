@@ -145,7 +145,7 @@ class WelcomePage extends Component {
       return;
     }
 
-    this.setState({loginSsaving: true});
+    this.setState({loginSaving: true});
 
     this.props.actions.loginUser(this.state.login)
       .then(() => this.redirectLoginSucess())
