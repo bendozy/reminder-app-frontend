@@ -7,7 +7,7 @@ export default function contactReducer(state = initialState.contact, action) {
       return action.contact;
     }
     case types.UPDATE_CONTACT_SUCCESS: {
-      return null;
+      return action.contact;
     }
     default:
       return state;

@@ -12,7 +12,7 @@ export default function contactsReducer(state = initialState.contacts, action) {
     case types.UPDATE_CONTACT_SUCCESS: {
       return [
         ...state.filter(contact => contact.id !== action.contact.id),
-        Object.assign({}, action.course),
+        Object.assign({}, action.contact),
       ];
     }
     case types.DELETE_CONTACT_SUCCESS: {

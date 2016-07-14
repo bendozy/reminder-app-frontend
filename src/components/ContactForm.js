@@ -1,10 +1,8 @@
 import React from 'react';
 import TextInput from '../common/TextInput';
 import EmailInput from '../common/EmailInput';
-import moment from 'moment';
 
 const ContactForm = ({ contact, onSave, onBlur, onChange, saving, errors, isNew }) => {
-  const birthday = isNew ? contact.birthday : moment(new Date(contact.birthday)).format('YYYY-MM-DD');
   return (
     <form className="contact-form">
       <div className="form-shadow col-md-8">
@@ -42,7 +40,7 @@ const ContactForm = ({ contact, onSave, onBlur, onChange, saving, errors, isNew 
         <TextInput
           name="birthday"
           label="Birthday"
-          value={birthday}
+          value={contact.birthday}
           required="required"
           size={60}
           placeholder="YYYY-MM-DD"

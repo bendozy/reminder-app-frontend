@@ -53,7 +53,7 @@ export function updateContact(data) {
         access_token: userData.id,
       },
     }).then(response => {
-      dispatch(updateContactSuccess(response.data));
+      return dispatch(updateContactSuccess(response.data));
     }).catch(error => {
       throw error;
     });

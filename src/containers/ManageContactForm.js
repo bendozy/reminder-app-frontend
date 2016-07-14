@@ -43,8 +43,12 @@ class ManageContactForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const newContact = Object.assign({},
+                         nextProps.contact,
+                         { birthday: moment(nextProps.contact.birthday)
+                           .format('YYYY-MM-DD') });
     this.setState({
-      contact: Object.assign({}, nextProps.contact),
+      contact: Object.assign({},  newContact),
       isNew: false,
     });
   }
@@ -142,7 +146,6 @@ class ManageContactForm extends React.Component {
     if (!this.contactFormIsValid()) {
       return;
     }
-
     this.setState({saving: true});
 
     if(this.state.isNew) {
@@ -204,7 +207,14 @@ ManageContactForm.contextTypes = {
 
 function getContactById(contacts, id) {
   const contact = contacts.filter(contact => contact.id == id);
-  if (contact) return contact[0]; //since filter returns an array, have to grab the first.
+  if (contact) {
+    const newContact = Object.assign({},
+                         contact[0],
+                         {birthday: moment(contact[0].birthday)
+                           .format('YYYY-MM-DD')});
+    return newContact;
+  }
+   //since filter returns an array, have to grab the first.
   return null;
 }
 
